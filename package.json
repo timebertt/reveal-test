@@ -1,0 +1,29 @@
+{
+  "name": "reveal-test",
+  "version": "0.1.0",
+  "description": "Testing reveal.js",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "start": "webpack serve --open",
+    "serve": "http-server ./dist -o"
+  },
+  "author": "Tim Ebert",
+  "license": "ISC",
+  "dependencies": {
+    "reveal.js": "^4.4.0",
+    "style-loader": "^3.3.1"
+  },
+  "devDependencies": {
+    "copy-webpack-plugin": "^11.0.0",
+    "css-loader": "^6.7.3",
+    "css-minimizer-webpack-plugin": "^4.2.2",
+    "html-webpack-plugin": "^5.5.0",
+    "http-server": "^14.1.1",
+    "mini-css-extract-plugin": "^2.7.2",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.11.1"
+  }
+}
