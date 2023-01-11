@@ -1,3 +1,4 @@
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
@@ -8,14 +9,19 @@ module.exports = {
   mode: devMode ? 'development' : 'production',
   entry: './index.js',
   output: {
-    path: __dirname + '/dist',
+    path: path.join(__dirname, 'dist'),
     filename: devMode ? '[name].js' : '[name].[contenthash].js',
     assetModuleFilename: '[name].[hash][ext][query]',
     clean: true
   },
   devtool: devMode ? 'inline-source-map' : 'source-map',
   devServer: {
-    static: './dist'
+    // static: [
+    //   {
+    //     directory: path.join(__dirname, 'assets'),
+    //     publicPath: '/assets'
+    //   },
+    // ]
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -36,8 +42,16 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.md$/,
+        test: /assets\/.*$/,
         type: 'asset/resource'
+      },
+      {
+        test: /content\/.*\.md$/,
+        type: 'asset/resource',
+        use: [
+          // 'markdown-image-loader'
+          'remark-loader'
+        ]
       },
       {
         test: /\.css$/i,
