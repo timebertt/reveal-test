@@ -10,19 +10,13 @@ module.exports = {
   entry: './index.js',
   output: {
     path: path.join(__dirname, 'dist'),
+    publicPath: '',
     filename: devMode ? '[name].js' : '[name].[contenthash].js',
     assetModuleFilename: '[name].[hash][ext][query]',
     clean: true
   },
   devtool: devMode ? 'inline-source-map' : 'source-map',
-  devServer: {
-    // static: [
-    //   {
-    //     directory: path.join(__dirname, 'assets'),
-    //     publicPath: '/assets'
-    //   },
-    // ]
-  },
+  devServer: {},
   plugins: [
     new HtmlWebpackPlugin({
       filename: 'index.html',
@@ -42,15 +36,14 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /assets\/.*$/,
+        test: /\.(svg|png|jpg|gif)$/,
         type: 'asset/resource'
       },
       {
-        test: /content\/.*\.md$/,
+        test: /\.md$/,
         type: 'asset/resource',
         use: [
-          // 'markdown-image-loader'
-          'remark-loader'
+          './loaders/image-loader.js'
         ]
       },
       {

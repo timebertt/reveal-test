@@ -9,7 +9,7 @@ import 'reveal.js/plugin/highlight/zenburn.css';
 
 // import all markdown files from ./content and omit one reveal section per file
 const markdownFiles = (ctx => {
-  return ctx.keys().map(ctx)
+  return ctx.keys().map(ctx);
 })(require.context('./content/', false, /\.md$/));
 
 const revealContainer = document.createElement('div');
@@ -19,18 +19,14 @@ slidesContainer.classList.add('slides');
 
 for (const file of markdownFiles) {
   const section = document.createElement('section');
+
   // use setAttribute, setting `separator-vertical` on `dataset` throws a DOMException
-  section.setAttribute('data-markdown', "");
+  section.setAttribute('data-markdown', file);
   section.setAttribute('data-separator', '^\r?\n---\r?\n$');
   section.setAttribute('data-separator-vertical', '^\r?\nvvv\r?\n$');
   section.setAttribute('data-separator-notes', 'notes?:');
   section.setAttribute('data-charset', 'utf-8');
 
-  const textarea = document.createElement('textarea');
-  textarea.setAttribute('data-template', "");
-  textarea.textContent = file;
-
-  section.appendChild(textarea);
   slidesContainer.appendChild(section);
 }
 
