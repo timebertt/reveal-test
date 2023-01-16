@@ -1,6 +1,6 @@
 import Reveal from 'reveal.js/dist/reveal.esm.js';
 import Markdown from 'reveal.js/plugin/markdown/markdown.esm.js';
-import Highlight from 'reveal.js/plugin/highlight/highlight.esm';
+import Highlight from 'reveal.js/plugin/highlight/highlight.esm.js';
 
 import 'reveal.js/dist/reset.css';
 import 'reveal.js/dist/reveal.css';

@@ -33,6 +33,9 @@ module.exports = {
     filename: '[name].[contenthash].css',
     chunkFilename: '[id].[contenthash].css'
   })]),
+  resolveLoader: {
+    modules: ['node_modules', path.resolve('./loaders')]
+  },
   module: {
     rules: [
       {
@@ -43,7 +46,7 @@ module.exports = {
         test: /\.md$/,
         type: 'asset/resource',
         use: [
-          './loaders/image-loader.js'
+          'image-loader'
         ]
       },
       {
