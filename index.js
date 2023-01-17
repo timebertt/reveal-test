@@ -1,7 +1,12 @@
 import Reveal from 'reveal.js/dist/reveal.esm.js';
+
+// plugins
 import Markdown from 'reveal.js/plugin/markdown/markdown.esm.js';
 import Highlight from 'reveal.js/plugin/highlight/highlight.esm.js';
+import Notes from 'reveal.js/plugin/notes/notes.esm.js';
 
+// styles
+import './custom.css';
 import 'reveal.js/dist/reset.css';
 import 'reveal.js/dist/reveal.css';
 import 'reveal.js/dist/theme/black.css';
@@ -33,7 +38,13 @@ for (const file of markdownFiles) {
 revealContainer.appendChild(slidesContainer);
 document.body.appendChild(revealContainer);
 
+// initialize reveal.js and plugins
 Reveal.initialize({
-  plugins: [Markdown, Highlight],
-  hash: true
+  plugins: [Markdown, Highlight, Notes],
+  hash: true,
+  history: true,
+  center: false,
+  controls: false,
+  navigationMode: 'default',
+  slideNumber: true
 });
