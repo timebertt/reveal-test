@@ -5,6 +5,21 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 const devMode = process.env.NODE_ENV !== 'production';
 
+// Use host-relative requests by default for local serving (e.g., dev server).
+let baseURL = null;
+if (process.env.NETLIFY) {
+  if (process.env.CONTEXT === 'production') {
+    // For production deploys, use the site's main address as the base URL.
+    // This always works, no matter if the site is requested on its main address or via a proxied address.
+    // If the site is requested via a proxied request, assets will be loaded via the main address.
+    baseURL = process.env.URL;
+  } else {
+    // In deploy previews or branch deploys, use the unique URL for an individual deploy.
+    // With this, older deploys still work by using the correct base URL.
+    baseURL = process.env.DEPLOY_URL;
+  }
+}
+
 module.exports = {
   mode: devMode ? 'development' : 'production',
   entry: './index.js',
@@ -24,10 +39,8 @@ module.exports = {
       meta: {
         'viewport': 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'
       },
-      // Use host-relative requests by default. This works locally (e.g., dev server), deploy previews, branch deploys.
-      // In production deploys, set the expected base URL for using path relative requests (otherwise, assets won't load).
       base: {
-        href: process.env.NETLIFY && process.env.CONTEXT === 'production' ? 'https://talks.timebertt.dev/reveal-test/' : null
+        href: baseURL
       },
       // in production mode, hash is included in output filename
       hash: devMode

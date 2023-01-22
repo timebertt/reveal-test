@@ -5,3 +5,9 @@ publish = "dist/"
 [build.environment]
 NODE_ENV = "production"
 NPM_FLAGS = "--include=dev"
+
+[[headers]]
+for = "/*"
+
+[headers.values]
+access-control-allow-origin = "*"
