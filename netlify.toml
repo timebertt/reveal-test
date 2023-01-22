@@ -6,8 +6,16 @@ publish = "dist/"
 NODE_ENV = "production"
 NPM_FLAGS = "--include=dev"
 
+# allow everything to be loaded from different hosts via the asset's canocical URL
 [[headers]]
 for = "/*"
 
 [headers.values]
 access-control-allow-origin = "*"
+
+# long-term caching for everything except index.html
+[[headers]]
+for = "/*"
+
+[headers.values]
+cache-control = "public,max-age=31536000,must-revalidate"
