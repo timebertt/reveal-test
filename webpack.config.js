@@ -24,8 +24,11 @@ module.exports = {
       meta: {
         'viewport': 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'
       },
-      // TODO: add base path
-      // 'base': 'http://example.com/some/page.html',
+      // Use host-relative requests by default. This works locally (e.g., dev server), deploy previews, branch deploys.
+      // In production deploys, set the expected base URL for using path relative requests (otherwise, assets won't load).
+      base: {
+        href: process.env.NETLIFY && process.env.CONTEXT === 'production' ? 'https://talks.timebertt.dev/reveal-test/' : null
+      },
       // in production mode, hash is included in output filename
       hash: devMode
     })
